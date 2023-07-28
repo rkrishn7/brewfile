@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -Eeo pipefail
+
+# Bootstraps a new system by installing `brew` if it doesn't exist
+# and all dependencies from the Brewfile
+
+if ! which brew > /dev/null; then
+  echo -e "Homebrew not found! Proceed with installation? (y/n) \c"
+  read
+  if "$REPLY" = "y"; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  else
+    echo "Exiting\n"
+    exit 1
+  fi
+fi
+
+echo -e "Homebrew installed!\n"
+
+brew bundle install
