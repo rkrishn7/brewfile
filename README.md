@@ -1,0 +1,2 @@
+# brewfile
+My brew dependencies
